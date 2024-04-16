@@ -21,10 +21,47 @@ export async function getRawPokemon(input: string | number) {
     return data;
 }
 
+export async function getPokemonInfo(input: string | number) {
+    const response = await fetch(POKE_API + "pokemon-species/" + String(input));
+    const data = await response.json();
+    return data;
+}
+
 export async function getDamageRelations(input: string) {
     const response = await fetch(POKE_API + "type/" + String(input));
-    console.log(POKE_API + "type/" + String(input))
+    // console.log(POKE_API + "type/" + String(input))
     const data = await response.json();
     return data.damage_relations;
 }
 
+export async function paginate(array: Pokemon[], page: number, perPage: number, searchQuery?: string, sortBy?: keyof Pokemon, sortOrder?: string) {
+     // Apply search filter
+     let filteredArray = array;
+     if (searchQuery) {
+         filteredArray = filteredArray.filter(pokemon => {
+             // Implement search logic here
+             return true; // Placeholder, implement your search logic
+         });
+     }
+ 
+     // Apply sorting
+     if (sortBy) {
+         filteredArray.sort((a, b) => {
+             const aValue = a[sortBy];
+             const bValue = b[sortBy];
+             if (aValue === bValue) return 0;
+             if (sortOrder === 'desc') {
+                return aValue > bValue ? -1 : 1;
+             } else {
+                return aValue < bValue ? -1 : 1;
+             }
+         });
+     }
+ 
+     // Apply pagination
+     const startIndex = (page - 1) * perPage;
+     const endIndex = startIndex + perPage;
+     return filteredArray.slice(startIndex, endIndex);
+  }
+  
+  

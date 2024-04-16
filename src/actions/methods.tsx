@@ -1,4 +1,4 @@
-import { Pokemon } from "@/components/columns";
+import { Pokemon } from "@/interfaces";
 import { TypeSlot, PokemonCard } from "@/interfaces";
 import { getRawPokemon, getDamageRelations } from "./pokeAPI";
 
@@ -49,7 +49,6 @@ export async function getPokemonCards(pokemonList: any) {
             name: pokemonList[key].name,
             types: card.types,
         })
-        console.log(card.types);
     }
     return pokemonCards;
 }
@@ -76,7 +75,6 @@ export async function calculateWeakness(typeNames: string[]) {
         half_damage_from: damage1.half_damage_from.map((type: any)=>(type.name)),
         no_damage_from: damage1.no_damage_from.map((type: any)=>(type.name)),
     }
-    console.log(weak1);
     if (typeNames.length === 1){
         return weak1.double_damage_from;
     }
@@ -91,7 +89,6 @@ export async function calculateWeakness(typeNames: string[]) {
         const diff1 = arrayDifference(arrayDifference(weak1.double_damage_from,weak2.half_damage_from),weak2.no_damage_from)
         const diff2 = arrayDifference(arrayDifference(weak2.double_damage_from,weak1.half_damage_from),weak1.no_damage_from)
         const result = addAndRemoveDuplicates(diff1,diff2);
-        console.log(addAndRemoveDuplicates(diff1,diff2))
         return result;
     }
 }

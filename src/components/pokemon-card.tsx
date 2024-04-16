@@ -27,7 +27,7 @@ export function Pokemons({ pokemons }: PokemonProps) {
                     <img className="w-full" src={getPokemonImageURL(pokemon.id)} alt="Pokemon Image" />
                     <div className="px-6 py-4">
                     <Link
-                        href={String(pokemon.id)}
+                        href={"view/"+String(pokemon.id)}
                         key={String(pokemon.id) + "Card"}
                     >
                     <div className="font-bold text-xl mb-2">{formatName(pokemon.name)}</div>

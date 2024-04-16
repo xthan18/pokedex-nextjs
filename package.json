@@ -34,5 +34,9 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "description": "First, run the development server:",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
